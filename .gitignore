@@ -21,3 +21,4 @@
 
 # Ignore seeding files
 airport_files/
+/db/AirportURLS.rb
