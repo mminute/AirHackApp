@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+url_array = LinksFromHash.new(AllAirportUrls)
+url_array.grab_links
+links = url_array.all_links
+
+p links
