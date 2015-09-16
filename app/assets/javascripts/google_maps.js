@@ -1,12 +1,79 @@
-function initialize() {
-  var mapProp = {
-    center:new google.maps.LatLng(51.508742,-0.120850),
-    zoom:5,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-}
-google.maps.event.addDomListener(window, 'load', initialize);
+$(document).ready(function(){
+    //Get location
+    var location = new Promise(function(resolve, reject){
+      navigator.geolocation.getCurrentPosition(function(position) {
+
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+        coords = {};
+        coords["latitude"] = lat;
+        coords["longitude"] = lon;
+
+        resolve(coords);
+      }); // navigator
+    }); //promise
+
+    location.then(function(coords){
+      var textArea = document.getElementById('coord');
+      textArea.innerHTML = coords["latitude"] + " " + coords["longitude"];
+
+      // function initialize() {
+        var mapProp = {
+          center:new google.maps.LatLng(coords["latitude"],coords["longitude"]),
+          zoom:5,
+          mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+        var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+      // }
+    })
+
+    // Promise.done(function(){
+    //   var textArea = document.getElementById('coord');
+    //   textArea.innerHTML = "New Contents";
+    // })
+    
+    // var textArea = document.getElementById('coord');
+    // textArea.innerHTML = coords;
+    
+
+    
+
+
+
+
+
+
+
+
+  }
+)
+
+
+
+
+// function initialize() {
+//   var mapProp = {
+//     center:new google.maps.LatLng(51.508742,-0.120850),
+//     zoom:5,
+//     mapTypeId:google.maps.MapTypeId.ROADMAP
+//   };
+//   var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+// }
+// // google.maps.event.addDomListener(window, 'load', initialize);
+
+
+// var textArea = document.getElementById('coord');
+// textArea.innerHTML = "New Contents";
+
+
+
+
+
+
+
+
+
+
 
 // Note: This example requires that you consent to location sharing when
 // prompted by your browser. If you see the error "The Geolocation service
