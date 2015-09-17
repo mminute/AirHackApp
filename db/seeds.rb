@@ -16,9 +16,6 @@ links = url_array.all_links
 
 files_found = Dir["lib/airport_files/*"]
 
-
-files_opened = 0
-
 links.each do |link|
   if link[-4] == "/"
     ident = link[-3..-1]
