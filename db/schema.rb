@@ -18,8 +18,26 @@ ActiveRecord::Schema.define(version: 20150916182154) do
     t.string   "airnav_url"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "vfr_map"
+    t.text     "airport_diagram_pdf_link"
+    t.text     "airport_diagram"
+    t.text     "notam_link"
+    t.text     "runway_info"
+    t.text     "airport_comms"
+    t.text     "airport_operations"
+    t.text     "vor"
+    t.text     "non_directional_beacon"
+    t.text     "airport_services"
+    t.text     "airport_ownership"
+    t.text     "airport_ops_stats"
+    t.text     "additional_remarks"
+    t.text     "nearby_airports_with_instrument_approaches"
+    t.text     "other_pages"
+    t.text     "where_to_stay"
+    t.text     "aviation_businesses"
+    t.text     "aerial_photo"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
 end
