@@ -18,3 +18,7 @@
 
 # Ignore api keys etc
 /config/secrets.yml
+
+# Ignore seeding files
+/lib/airport_files/
+/lib/AirportURLS.rb

@@ -25,4 +25,18 @@ $(document).ready(function(){
 
     });
   };
+
+  function markerMaker(airport){
+    var airportMarker = new google.maps.Marker({
+      position: new google.maps.LatLng( airport.latitude, airport.longitude),
+      map: map,
+      title: airport.identifier
+    })
+  };
+
+  gon.airports.forEach(function(airport){
+    markerMaker(airport);
+  });
+
+
 });
