@@ -31,12 +31,16 @@ $(document).ready(function(){
       position: new google.maps.LatLng( airport.latitude, airport.longitude),
       map: map,
       title: airport.identifier
-    })
+    });
+    var infowindow = new google.maps.InfoWindow({
+      content: airport.identifier
+    });
+    airportMarker.addListener('hover', function() {
+      infowindow.open(map, airportMarker);
+    });
   };
 
   gon.airports.forEach(function(airport){
     markerMaker(airport);
   });
-
-
 });
