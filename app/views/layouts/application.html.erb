@@ -6,6 +6,9 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= analytics_init if Rails.env.production? %>
+  <%= include_gon %>
+  <script src="http://maps.googleapis.com/maps/api/js"></script>
+  <%= javascript_include_tag "google_maps" %>
 </head>
 <body>
 
