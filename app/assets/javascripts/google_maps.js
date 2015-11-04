@@ -19,7 +19,7 @@ $(document).ready(function(){
       var userMarker = new google.maps.Marker({
         position: foundLocation,
         map: map,
-        title: 'User Location\n' + String(foundLocation),
+        title: "User Location\n" + "Lat: " + String(foundLocation.lat()) + ", Long: " + String(foundLocation.lng()),
         animation: google.maps.Animation.DROP,
         icon: new google.maps.MarkerImage(userIcon)
       });
