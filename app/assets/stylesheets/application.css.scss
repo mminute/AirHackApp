@@ -43,5 +43,29 @@ html, body, #googleMap, .mapCanvas {
 }
 
 #googleMap {
+    width: 100%;
     position: relative;
+    bottom: 30px;
+    margin-right: 0;
+}
+
+.info-bar {
+  position: absolute;
+  height: 100%;
+  width: 33%;
+  top: 50px;
+  right: 0;
+}
+
+footer.navbar-fixed-bottom {
+  min-height: 30px;
+}
+
+footer p {
+  display: inline-block;
+  vertical-align: middle;
+  float: right;
+  padding-top: 4px;
+  margin-bottom: 0px;
+  margin-right: 15px;
 }

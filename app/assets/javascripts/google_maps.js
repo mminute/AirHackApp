@@ -37,10 +37,25 @@ $(document).ready(function(){
     });
     // Click Action shows airport in sidebar
     airportMarker.addListener('click', function() {
-      alert("Clicked " + airport.identifier);
+      var infoBar = $("aside.info-bar")
+      var mainMap = document.getElementById("googleMap");
+
+      if (infoBar){
+        infoBar.remove();
+      };
+
+      makeInfobar(airport);
+      mainMap.style.width="67%";
     });
   };
-  // Maked a map marker for each airport
+
+  function makeInfobar(airport){
+    $("section.mapCanvas").append("<aside class='info-bar'></aside>")
+    var ident = $("aside.info-bar").append("<div class='topics' id='identifier'></div>")
+    ident_title = "<p>" + airport.identifier + "</p>";
+    ident.append(ident_title)
+  };
+  // Make a map marker for each airport
   gon.airports.forEach(function(airport){
     markerMaker(airport);
   });
