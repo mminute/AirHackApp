@@ -50,11 +50,22 @@ $(document).ready(function(){
   };
 
   function makeInfobar(airport){
-    $("section.mapCanvas").append("<aside class='info-bar'></aside>")
-    var ident = $("aside.info-bar").append("<div class='topics' id='identifier'></div>")
+    $("section.mapCanvas").append("<aside class='info-bar'></aside>");
+    makeInfoBarHider();
+    var ident = $("aside.info-bar").append("<div class='topics' id='identifier'></div>");
     ident_title = "<p>" + airport.identifier + "</p>";
-    ident.append(ident_title)
+    ident.append(ident_title);
   };
+
+  function makeInfoBarHider() {
+    $("aside.info-bar").append("<div class='info-bar-hider'>Hide Me</div>")
+    hider = $("div.info-bar-hider")
+    hider.click(function() {
+      $("#googleMap").css('width','100%');
+      $("aside.info-bar").remove();
+    });
+  };
+
   // Make a map marker for each airport
   gon.airports.forEach(function(airport){
     markerMaker(airport);
