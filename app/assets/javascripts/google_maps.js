@@ -52,9 +52,18 @@ $(document).ready(function(){
   function makeInfobar(airport){
     $("section.mapCanvas").append("<aside class='info-bar'></aside>");
     makeInfoBarHider();
-    var ident = $("aside.info-bar").append("<div class='topics' id='identifier'></div>");
-    ident_title = "<p>" + airport.identifier + "</p>";
-    ident.append(ident_title);
+    // var ident = $("aside.info-bar").append("<div class='topics' id='identifier'></div>");
+    // ident_title = "<p>" + airport.identifier + "</p>";
+    // ident.append(ident_title);
+    var infoBar = $("aside.info-bar")
+    $.each(airport, function(k,v) {
+      if (v) {
+        var htmlElement = "<div class='topics' id=" + k + ">" + k + "</div>"
+        infoBar.append(htmlElement);
+        var valueElement = "<p>" + v + "</p>"
+        $("#" + k).append(valueElement);
+      };
+    });
   };
 
   function makeInfoBarHider() {
