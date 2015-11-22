@@ -52,11 +52,33 @@ $(document).ready(function(){
   function makeInfobar(airport){
     $("section.mapCanvas").append("<aside class='info-bar'></aside>");
     makeInfoBarHider();
+    // Ident and Link
     var identAndLink = "<a href=" + airport.airnav_url + " target='_blank'>" + airport.identifier + "</a>"
     $("aside.info-bar").append("<div class='topics' id='identifier'>" + identAndLink + "</div>");
+
+    // Location
     $("aside.info-bar").append("<div class='topics' id='location'>Location</div>");
     var latString = "<p>Lat: " + airport.latitude + ", Long: " + airport.longitude + "</p>"
     $("#location").append(latString)
+
+    // VFR Map
+    if(airport.vfr_map) {
+      $("aside.info-bar").append("<div class='topics' id='vfr-map'>VFR Map</div>");
+      var vfrImage = "<img src=" +  airport.vfr_map +">"
+      var vfrLink = "http://vfrmap.com/?type=vfrc&lat=" + airport.latitude + "&lon=" + airport.longitude + "&zoom=10"
+      var combinedImageLink = "<a href=" + vfrLink + " target='_blank'>" + vfrImage + "</a>"
+      $("#vfr-map").append(combinedImageLink)
+    };
+
+    // Airport diagram and link
+    // weather
+    // notams
+    
+
+
+
+
+
     // Maybe iterate through desired keys by removing undesired
    // Object.keys(gon.airports[0]) - ["id", "updated_at"] ...
 
