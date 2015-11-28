@@ -37,6 +37,7 @@ $(document).ready(function(){
     });
     // Click Action shows airport in sidebar
     airportMarker.addListener('click', function() {
+      
       var infoBar = $("aside.info-bar")
       var mainMap = document.getElementById("googleMap");
 
@@ -44,10 +45,19 @@ $(document).ready(function(){
         infoBar.remove();
       };
 
-      makeInfobar(airport);
+      // makeInfobar(airport);
       mainMap.style.width="67%";
     });
   };
+
+  function makeAjaxRequest(url, callback){
+    $.ajax({
+      url: url,
+      dataType: 'jsonp',
+      success: callback,
+    })
+  };
+
 
   function makeInfobar(airport){
     $("section.mapCanvas").append("<aside class='info-bar'></aside>");

@@ -1,8 +1,7 @@
 class HomeController < ApplicationController
 
   def show
-    # binding.pry
-    gon.airports = AirportToHash.convert(Airport.all)
+    gon.airports = Airport.select([:latitude, :longitude, :identifier])
     render 'welcome_page'
   end
 
