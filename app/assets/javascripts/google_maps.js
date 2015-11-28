@@ -61,36 +61,50 @@ $(document).ready(function(){
     var latString = "<p>Lat: " + airport.latitude + ", Long: " + airport.longitude + "</p>"
     $("#location").append(latString)
 
+    // Add weather here
+
+    // add notams here
+
     // VFR Map
     if(airport.vfr_map) {
       $("aside.info-bar").append("<div class='topics' id='vfr-map'>VFR Map</div>");
       var vfrImage = "<img src=" +  airport.vfr_map +">"
       var vfrLink = "http://vfrmap.com/?type=vfrc&lat=" + airport.latitude + "&lon=" + airport.longitude + "&zoom=10"
-      var combinedImageLink = "<a href=" + vfrLink + " target='_blank'>" + vfrImage + "</a>"
+      var combinedImageLink = "<a href=" + vfrLink + " target='_blank'>" + vfrImage + "</a> <p>Click map for larger image</p>"
       $("#vfr-map").append(combinedImageLink)
     };
 
-    // Airport diagram and link
-    // weather
-    // notams
-    
+    // Aerial Photo
+    if(airport.aerial_photo) {
+      $("aside.info-bar").append("<div class='topics' id='aerial-photo'>Aerial Photo</div>");
+      var aerialPhoto = "<img src=" +  airport.aerial_photo +">"
+      $("#aerial-photo").append(aerialPhoto)
+    };
 
+    // Airport Diagram- Work on finding link to larger pdf
+    // http://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/results/
+    if(airport.airport_diagram) {
+      $("aside.info-bar").append("<div class='topics' id='airport-diagram'>Airport Diagram</div>");
+      var diagramImage = "<img src=http://" +  airport.airport_diagram +">"
+      $("#airport-diagram").append(diagramImage)
+    };
 
+    // drop airport_diagram_pdf_link column? Does not appear to work as
 
-
-
-    // Maybe iterate through desired keys by removing undesired
-   // Object.keys(gon.airports[0]) - ["id", "updated_at"] ...
-
-    // var infoBar = $("aside.info-bar")
-    // $.each(airport, function(k,v) {
-    //   if (v) {
-    //     var htmlElement = "<div class='topics' id=" + k + ">" + k + "</div>"
-    //     infoBar.append(htmlElement);
-    //     var valueElement = "<p>" + v + "</p>"
-    //     $("#" + k).append(valueElement);
-    //   };
-    // });
+    // t.text     "notam_link"
+    // t.text     "runway_info"
+    // t.text     "airport_comms"
+    // t.text     "airport_operations"
+    // t.text     "vor"
+    // t.text     "non_directional_beacon"
+    // t.text     "airport_services"
+    // t.text     "airport_ownership"
+    // t.text     "airport_ops_stats"
+    // t.text     "additional_remarks"
+    // t.text     "nearby_airports_with_instrument_approaches"
+    // t.text     "other_pages"
+    // t.text     "where_to_stay"
+    // t.text     "aviation_businesses"
   };
 
   function makeInfoBarHider() {
