@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
 
   def show
-    gon.airports = Airport.all
+    # binding.pry
+    gon.airports = AirportToHash.convert(Airport.all)
     render 'welcome_page'
   end
 
