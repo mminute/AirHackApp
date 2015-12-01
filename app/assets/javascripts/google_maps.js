@@ -37,10 +37,13 @@ $(document).ready(function(){
     });
     // Click Action shows airport in sidebar
     airportMarker.addListener('click', function() {
+      url = "airports/" + airport.id
       var infoBar = $("aside.info-bar")
       var mainMap = document.getElementById("googleMap");
 
-      makeAjaxRequest("airports/" + airport.id)
+      makeAjaxRequest(url, alert(airport.id))
+
+
 
       if (infoBar){
         infoBar.remove();
@@ -51,11 +54,11 @@ $(document).ready(function(){
     });
   };
 
-  function makeAjaxRequest(url){
+  function makeAjaxRequest(url, callback){
     $.ajax({
       url: url,
       // dataType: 'jsonp',
-      success: alert("hello"),
+      success: callback,
     })
   };
 
