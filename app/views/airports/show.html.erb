@@ -1,0 +1,43 @@
+<aside class='info-bar'>
+  <div class='topics' id='identifier'>
+   <a href="<%=  @airport.airnav_url%>">
+     <%= @airport.identifier %>
+   </a>
+  </div>
+  
+</aside>
+
+<!-- 
+    // Location
+    $("aside.info-bar").append("<div class='topics' id='location'>Location</div>");
+    var latString = "<p>Lat: " + airport.latitude + ", Long: " + airport.longitude + "</p>"
+    $("#location").append(latString)
+
+    // Add weather here
+
+    // add notams here
+
+    // VFR Map
+    if(airport.vfr_map) {
+      $("aside.info-bar").append("<div class='topics' id='vfr-map'>VFR Map</div>");
+      var vfrImage = "<img src=" +  airport.vfr_map +">"
+      var vfrLink = "http://vfrmap.com/?type=vfrc&lat=" + airport.latitude + "&lon=" + airport.longitude + "&zoom=10"
+      var combinedImageLink = "<a href=" + vfrLink + " target='_blank'>" + vfrImage + "</a> <p>Click map for larger image</p>"
+      $("#vfr-map").append(combinedImageLink)
+    };
+
+    // Aerial Photo
+    if(airport.aerial_photo) {
+      $("aside.info-bar").append("<div class='topics' id='aerial-photo'>Aerial Photo</div>");
+      var aerialPhoto = "<img src=" +  airport.aerial_photo +">"
+      $("#aerial-photo").append(aerialPhoto)
+    };
+
+    // Airport Diagram- Work on finding link to larger pdf
+    // http://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/results/
+    if(airport.airport_diagram) {
+      $("aside.info-bar").append("<div class='topics' id='airport-diagram'>Airport Diagram</div>");
+      var diagramImage = "<img src=http://" +  airport.airport_diagram +">"
+      $("#airport-diagram").append(diagramImage)
+    };
+ -->
