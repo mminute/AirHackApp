@@ -41,7 +41,7 @@ $(document).ready(function(){
       var infoBar = $("aside.info-bar")
       var mainMap = document.getElementById("googleMap");
 
-      makeAjaxRequest(url, alert(airport.id))
+      makeAjaxRequest(url, function(stuff){alert(stuff)})
 
 
 
@@ -57,8 +57,9 @@ $(document).ready(function(){
   function makeAjaxRequest(url, callback){
     $.ajax({
       url: url,
-      // dataType: 'jsonp',
-      success: callback,
+      type: 'GET',
+      dataType: 'html',
+      success: function(response){ callback(response)},
     })
   };
 

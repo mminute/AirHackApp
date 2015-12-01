@@ -6,7 +6,11 @@ class AirportsController < ApplicationController
   end
 
   def show
-    @airport = Airport.find_by(identifier: params['id'])
-    render 'show'
+    # binding.pry
+    @airport = Airport.find(params['id'])
+    
+    respond_to do |format|
+      format.html {render action: 'show'}
+    end
   end
 end
