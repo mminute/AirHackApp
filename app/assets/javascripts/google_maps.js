@@ -41,7 +41,7 @@ $(document).ready(function(){
       var infoBar = $("aside.info-bar")
       var mainMap = document.getElementById("googleMap");
 
-      makeAjaxRequest(url, function(stuff){alert(stuff)})
+      makeAjaxRequest(url, function(stuff){console.log(stuff)})
 
 
 
@@ -61,50 +61,6 @@ $(document).ready(function(){
       dataType: 'html',
       success: function(response){ callback(response)},
     })
-  };
-
-  function makeInfobar(airport){
-    $("section.mapCanvas").append("<aside class='info-bar'></aside>");
-    makeInfoBarHider();
-    // Ident and Link
-    var identAndLink = "<a href=" + airport.airnav_url + " target='_blank'>" + airport.identifier + "</a>"
-    $("aside.info-bar").append("<div class='topics' id='identifier'>" + identAndLink + "</div>");
-
-    // Location
-    $("aside.info-bar").append("<div class='topics' id='location'>Location</div>");
-    var latString = "<p>Lat: " + airport.latitude + ", Long: " + airport.longitude + "</p>"
-    $("#location").append(latString)
-
-    // Add weather here
-
-    // add notams here
-
-    // VFR Map
-    if(airport.vfr_map) {
-      $("aside.info-bar").append("<div class='topics' id='vfr-map'>VFR Map</div>");
-      var vfrImage = "<img src=" +  airport.vfr_map +">"
-      var vfrLink = "http://vfrmap.com/?type=vfrc&lat=" + airport.latitude + "&lon=" + airport.longitude + "&zoom=10"
-      var combinedImageLink = "<a href=" + vfrLink + " target='_blank'>" + vfrImage + "</a>"
-      $("#vfr-map").append(combinedImageLink)
-    };
-
-
-
-
-
-
-    // Maybe iterate through desired keys by removing undesired
-   // Object.keys(gon.airports[0]) - ["id", "updated_at"] ...
-
-    // var infoBar = $("aside.info-bar")
-    // $.each(airport, function(k,v) {
-    //   if (v) {
-    //     var htmlElement = "<div class='topics' id=" + k + ">" + k + "</div>"
-    //     infoBar.append(htmlElement);
-    //     var valueElement = "<p>" + v + "</p>"
-    //     $("#" + k).append(valueElement);
-    //   };
-    // });
   };
 
   function makeInfoBarHider() {

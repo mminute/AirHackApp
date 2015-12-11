@@ -10,7 +10,7 @@ class AirportsController < ApplicationController
     @airport = Airport.find(params['id'])
     
     respond_to do |format|
-      format.html {render action: 'show'}
+      format.html { render layout: false }
     end
   end
 end

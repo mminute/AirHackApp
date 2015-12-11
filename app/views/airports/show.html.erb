@@ -1,45 +1,168 @@
-"hello world"
+<aside class='info-bar'>
+  <div class='topic' id='identifier'>
+    <div class="topic-title">
+      <a href="<%=  @airport.airnav_url%>">
+          <%= @airport.identifier %>
+      </a>
+    </div>
+  </div>
 
-<!-- <aside class='info-bar'>
-  <div class='topics' id='identifier'>
-   <a href="<%=  @airport.airnav_url%>">
-     <%= @airport.identifier %>
-   </a>
+  <div class="topic" id="location">
+    <div class="topic-title">
+      Location
+    </div>
+    <p>
+      <%= @airport.latitude %> Lat, <%= @airport.longitude %> Long
+    </p> 
+  </div>
+
+  <div class="topic" id="weather">
+    <!-- put weather info here -->
+  </div>
+
+  <div class="topic" id="notam">
+    <!-- put notam info here
+    @airport.notam_link -->
+  </div>  
+
+  <div class='topic' id='vfr-map'>
+    <div class="topic-title">
+      VFR Map
+    </div>
+    <img src="<%= @airport.vfr_map %>" alt="vfr map">
+  </div>
+
+  <div class="topic" id="aerial-photo">
+    <div class="topic-title">
+      Aerial Photo
+    </div>
+    <img src="<%= "http:" + @airport.aerial_photo if @airport.aerial_photo %>" alt="aerial photo">
+  </div>
+
+  <div class="topic" id="airport-diagram">
+    <div class="topic-title">
+      Airport Diagram
+    </div>
+    <!-- diagram link broken -->
+    <a href="<%= @airport.airport_diagram_pdf_link %>"></a>
+    <img src="<%= "http://" + @airport.airport_diagram if @airport.airport_diagram %>" alt="airport diagram">
+  </div>
+
+  <div class="topic" id="runway-info">
+    <div class="topic-title">
+      Runway Information
+    </div>
+    <div class="topic-content">
+      <%= @airport.runway_info %>
+    </div>
+  </div>
+
+  <div class="topic" id="airport-comms">
+    <div class="topic-title">
+      Airport Communications
+    </div>
+    <div class="topic-content">
+      <%= @airport.airport_comms %>
+    </div>
+  </div>
+
+  <div class="topic" id="airport-operations">
+    <div class="topic-title">
+      Airport Operations
+    </div>
+    <div class="topic-content">
+      <%= @airport.airport_operations %>
+    </div>
+  </div>
+
+  <div class="topic" id="vor">
+    <div class="topic-title">
+      VOR
+    </div>
+    <div class="topic-content">
+      <%= @airport.vor %>
+    </div>
+  </div>
+
+  <div class="topic" id="non-directional-beacon">
+    <div class="topic-title">
+      Non-Directional Beacon
+    </div>
+    <div class="topic-content">
+      <%= @airport.non_directional_beacon %>
+    </div>
+  </div>
+
+  <div class="topic" id="airport-services">
+    <div class="topic-title">
+      Airport Services
+    </div>
+    <div class="topic-content">
+      <%= @airport.airport_services %>
+    </div>
+  </div>
+
+  <div class="topic" id="airport-ownership">
+    <div class="topic-title">
+      Airport Communications
+    </div>
+    <div class="topic-content">
+      <%= @airport.airport_ownership %>
+    </div>
+  </div>
+
+  <div class="topic" id="airport-ops-stats">
+    <div class="topic-title">
+      Airport Operations Stats
+    </div>
+    <div class="topic-content">
+      <%= @airport.airport_ops_stats %>
+    </div>
+  </div>
+
+  <div class="topic" id="additional-remarks">
+    <div class="topic-title">
+      Additional Remarks
+    </div>
+    <div class="topic-content">
+      <%= @airport.additional_remarks %>
+    </div>
+  </div>
+
+  <div class="topic" id="nearby-airports-with_instrument-approaches">
+    <div class="topic-title">
+      Nearby Airports With Instrument Approaches
+    </div>
+    <div class="topic-content">
+      <%= @airport.nearby_airports_with_instrument_approaches %>
+    </div>
+  </div>
+
+  <div class="topic" id="other-pages">
+    <div class="topic-title">
+      Other Pages
+    </div>
+    <div class="topic-content">
+      <%= @airport.other_pages %>
+    </div>
+  </div>
+
+  <div class="topic" id="where-to-stay">
+    <div class="topic-title">
+      Where To Stay
+    </div>
+    <div class="topic-content">
+      <%= @airport.where_to_stay %>
+    </div>
+  </div>
+
+  <div class="topic" id="aviation-businesses">
+    <div class="topic-title">
+      Aviation Businesses
+    </div>
+    <div class="topic-content">
+      <%= @airport.aviation_businesses %>
+    </div>
   </div>
   
-</aside> -->
-
-<!-- 
-    // Location
-    $("aside.info-bar").append("<div class='topics' id='location'>Location</div>");
-    var latString = "<p>Lat: " + airport.latitude + ", Long: " + airport.longitude + "</p>"
-    $("#location").append(latString)
-
-    // Add weather here
-
-    // add notams here
-
-    // VFR Map
-    if(airport.vfr_map) {
-      $("aside.info-bar").append("<div class='topics' id='vfr-map'>VFR Map</div>");
-      var vfrImage = "<img src=" +  airport.vfr_map +">"
-      var vfrLink = "http://vfrmap.com/?type=vfrc&lat=" + airport.latitude + "&lon=" + airport.longitude + "&zoom=10"
-      var combinedImageLink = "<a href=" + vfrLink + " target='_blank'>" + vfrImage + "</a> <p>Click map for larger image</p>"
-      $("#vfr-map").append(combinedImageLink)
-    };
-
-    // Aerial Photo
-    if(airport.aerial_photo) {
-      $("aside.info-bar").append("<div class='topics' id='aerial-photo'>Aerial Photo</div>");
-      var aerialPhoto = "<img src=" +  airport.aerial_photo +">"
-      $("#aerial-photo").append(aerialPhoto)
-    };
-
-    // Airport Diagram- Work on finding link to larger pdf
-    // http://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/results/
-    if(airport.airport_diagram) {
-      $("aside.info-bar").append("<div class='topics' id='airport-diagram'>Airport Diagram</div>");
-      var diagramImage = "<img src=http://" +  airport.airport_diagram +">"
-      $("#airport-diagram").append(diagramImage)
-    };
- -->
+</aside>
