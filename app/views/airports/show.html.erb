@@ -1,7 +1,7 @@
 <aside class='info-bar'>
   <div class='topic' id='identifier'>
     <div class="topic-title">
-      <a href="<%=  @airport.airnav_url%>">
+      <a href="<%=  @airport.airnav_url%>" target="_blank">
           <%= @airport.identifier %>
       </a>
     </div>
@@ -25,144 +25,347 @@
     @airport.notam_link -->
   </div>  
 
-  <div class='topic' id='vfr-map'>
-    <div class="topic-title">
-      VFR Map
+  <% if @airport.vfr_map %>
+    <div class='topic' id='vfr-map'>
+      <div class="topic-title">
+        VFR Map
+      </div>
+      <img src="<%= @airport.vfr_map %>" alt="vfr map">
     </div>
-    <img src="<%= @airport.vfr_map %>" alt="vfr map">
-  </div>
+  <% end %>
 
+  <% if @airport.aerial_photo %>
   <div class="topic" id="aerial-photo">
     <div class="topic-title">
       Aerial Photo
     </div>
     <img src="<%= "http:" + @airport.aerial_photo if @airport.aerial_photo %>" alt="aerial photo">
   </div>
+  <% end %>
 
-  <div class="topic" id="airport-diagram">
-    <div class="topic-title">
-      Airport Diagram
+  <% if @airport.airport_diagram %>
+    <div class="topic" id="airport-diagram">
+      <div class="topic-title">
+        Airport Diagram
+      </div>
+      <!-- diagram link broken -->
+      <a href="<%= @airport.airport_diagram_pdf_link %>"></a>
+      <img src="<%= 'http://' + @airport.airport_diagram if @airport.airport_diagram %>" alt="airport diagram">
     </div>
-    <!-- diagram link broken -->
-    <a href="<%= @airport.airport_diagram_pdf_link %>"></a>
-    <img src="<%= "http://" + @airport.airport_diagram if @airport.airport_diagram %>" alt="airport diagram">
-  </div>
+  <% end %>
 
-  <div class="topic" id="runway-info">
-    <div class="topic-title">
-      Runway Information
+  <% if @airport.runway_info %>
+    <div class="topic" id="runway-info">
+      <div class="topic-title">
+        Runway Information
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.runway_info).each do |runway, runway_info| %>
+          <div id=" <%= @airport.identifier + '-' + runway.gsub(' ', '-') %>">
+            <div class="runway">
+              <%= runway %>
+            </div>
+            <div class="runway-info">
+              <% runway_info.each do |runway_property, property_value| %>
+              <div class="runwayinfo-type">
+                <p>
+                  <%= runway_property %>
+                </p>
+                <p>
+                  <%= property_value %>
+                </p>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.runway_info %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="airport-comms">
-    <div class="topic-title">
-      Airport Communications
+  <% if @airport.airport_comms %>
+    <div class="topic" id="airport-comms">
+      <div class="topic-title">
+        Airport Communications
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.airport_comms).each do |comms_prop, comms_value| %>
+          <div id="<%= @airport.identifier + '-' + comms_prop.gsub(' ','-') %>">
+            <div>
+              <p>
+                <%= comms_prop %>
+              </p>
+              <p>
+                <%= comms_value.is_a?(Array) ? comms_value.join(". ") : comms_value %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.airport_comms %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="airport-operations">
-    <div class="topic-title">
-      Airport Operations
+  <% if @airport.airport_operations %>
+    <div class="topic" id="airport-operations">
+      <div class="topic-title">
+        Airport Operations
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.airport_operations).each do |ops_property, ops_value| %>
+          <div id="<%= @airport.identifier + '-' + ops_property.gsub(' ','-') %>">
+            <div>
+              <p>
+                <%= ops_property %>
+              </p>
+              <p>
+                <%= ops_value.is_a?(Array) ? ops_value.join(". ") : ops_value %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.airport_operations %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="vor">
-    <div class="topic-title">
-      VOR
+  <% if @airport.vor %>
+    <div class="topic" id="vor">
+      <div class="topic-title">
+        VOR
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.vor).each do |vor_prop, vor_val| %>
+          <div id="<%= @airport.identifier + '-' + vor_prop.gsub(' ','-') %>">
+            <div>
+              <%= vor_prop %>
+            </div>
+            <div>
+              <% vor_val.each do |k, v| %>
+                <div>
+                  <% if v.match('http') %>
+                    <a href="<%= v %>" target="_blank">
+                      <%= k.to_s.split('_').join(' ').titleize %>
+                    </a> 
+                  <% else %>
+                    <%= k.to_s.split('_').join(' ').titleize %>: <%= v %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.vor %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="non-directional-beacon">
-    <div class="topic-title">
-      Non-Directional Beacon
+  <% if @airport.non_directional_beacon %>
+    <div class="topic" id="non-directional-beacon">
+      <div class="topic-title">
+        Non-Directional Beacon
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.non_directional_beacon).each do |ndb_location, ndb_info| %>
+          <div id="<%= 'ndb-' + ndb_location.gsub(' ','-') %>">
+            <div>
+              <%= ndb_location %>
+            </div>
+            <div>
+              <% ndb_info.each do |k,v| %>
+                <% display_key = k.to_s.split('_').join(' ').titleize %>
+                <p>
+                  <% if v.match('http')  %>
+                    <a href="<%= v %>" target="_blank">
+                      <%= display_key %>
+                    </a>
+                  <% else %>
+                    <%= display_key %>: <%= v %>
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.non_directional_beacon %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="airport-services">
-    <div class="topic-title">
-      Airport Services
+  <% if @airport.airport_services %>
+    <div class="topic" id="airport-services">
+      <div class="topic-title">
+        Airport Services
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.airport_services).each do |airport_service, details| %>
+          <%= airport_service %> <%= details %>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.airport_services %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="airport-ownership">
-    <div class="topic-title">
-      Airport Communications
+  <% if @airport.airport_ownership %>
+    <div class="topic" id="airport-ownership">
+      <div class="topic-title">
+        Airport Ownership
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.airport_ownership).each do |owner_property, property_val| %>
+          <div id="<%= @airport.identifier + '-' +owner_property[0..-2] %>">
+            <p>
+              <%= owner_property %>
+            </p> 
+            <% property_val.each do |entry| %>
+            <p>
+              <%= entry %>
+            </p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.airport_ownership %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="airport-ops-stats">
-    <div class="topic-title">
-      Airport Operations Stats
+  <% if @airport.airport_ops_stats %>
+    <div class="topic" id="airport-ops-stats">
+      <div class="topic-title">
+        Airport Operations Stats
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.airport_ops_stats).each do |ops_category, ops_stat| %>
+          <%= raw ops_category.split(' ').join(' ').titleize %> <%= ops_stat.capitalize %>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.airport_ops_stats %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="additional-remarks">
-    <div class="topic-title">
-      Additional Remarks
+  <% if @airport.nearby_airports_with_instrument_approaches %>
+    <div class="topic" id="nearby-airports-with_instrument-approaches">
+      <div class="topic-title">
+        Nearby Airports With Instrument Approaches
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.nearby_airports_with_instrument_approaches).each do |airport, info| %>
+          <div id="<%= airport + '-near-to-' + @airport.identifier %>">
+            <a href="<%= info[:link] %>" target="_blank">
+              <%= airport %>
+            </a>
+            <p>
+              <%= info[:name] %>
+            </p>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.additional_remarks %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="nearby-airports-with_instrument-approaches">
-    <div class="topic-title">
-      Nearby Airports With Instrument Approaches
+  <% if @airport.additional_remarks %>
+    <div class="topic" id="additional-remarks">
+      <div class="topic-title">
+        Additional Remarks
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.additional_remarks).each do |remark| %>
+          <p>
+            <%= raw(remark) %>
+          </p>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.nearby_airports_with_instrument_approaches %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="other-pages">
-    <div class="topic-title">
-      Other Pages
+  <% if @airport.aviation_businesses %>
+    <div class="topic" id="aviation-businesses">
+      <div class="topic-title">
+        Aviation Businesses
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.aviation_businesses).each do |biz, biz_info| %>
+          <div id=" <%= @airport.identifier + '-' + biz.gsub(' ','-') %> ">
+            <p>
+              <%= biz %>
+            </p>
+            <ul>
+              <% biz_info.each do |info_type, info| %>
+                <p>
+                  <%= info_type.to_s.split('_').join(' ').titleize %>
+                </p>
+                <% if info.class == Hash %>
+                  <ul>
+                    <% info.each do |k,v| %>
+                      <% if v.class == Array %>
+                        <li>
+                          <% v.each do |q| %>
+                            <p>
+                              <%= q %>
+                            </p>
+                          <% end %>
+                        </li>
+                      <% else %>
+                        <li>
+                          <%= v %>
+                        </li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                <% else %>
+                  <p>
+                    <%= raw(info) %>
+                  </p>
+                <% end %>
+                
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.other_pages %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="where-to-stay">
-    <div class="topic-title">
-      Where To Stay
+  <% if @airport.where_to_stay %>
+    <div class="topic" id="where-to-stay">
+      <div class="topic-title">
+        Where To Stay
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.where_to_stay).each do |category, category_info| %>
+          <div id="<%= @airport.identifier + '-' + category.to_s.gsub('_', '-') %>">
+            <p>
+              <%= category.to_s.split('_').join(' ').titleize %>:
+            </p>
+            <% category_info.each do |city_or_hotel, vals| %>
+              <div id="<%= @airport.identifier + '-' + city_or_hotel.gsub(' ', '-').gsub(',', '-') %>">
+                <p>
+                  <%= city_or_hotel %>
+                </p>
+                <ul>
+                  <% (vals.keys - [:count]).each do |key| %>
+                    <li>
+                      <% if key == :link %>
+                        <a href="<%= vals[key] %>" target="_blank">
+                          Link
+                        </a>
+                      <% else %>
+                        <%= key.capitalize %>: <%= vals[key] %>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.where_to_stay %>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="topic" id="aviation-businesses">
-    <div class="topic-title">
-      Aviation Businesses
+  <% if @airport.other_pages %>
+    <div class="topic" id="other-pages">
+      <div class="topic-title">
+        Other Pages
+      </div>
+      <div class="topic-content">
+        <% eval(@airport.other_pages).each do |link| %>
+            <%= link %>
+        <% end %>
+      </div>
     </div>
-    <div class="topic-content">
-      <%= @airport.aviation_businesses %>
-    </div>
-  </div>
-  
+  <% end %>
 </aside>
